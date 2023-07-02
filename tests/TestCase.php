@@ -2,9 +2,9 @@
 
 namespace Igorsgm\Redash\Tests;
 
+use Igorsgm\Redash\RedashServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Igorsgm\Redash\RedashServiceProvider;
 
 class TestCase extends Orchestra
 {

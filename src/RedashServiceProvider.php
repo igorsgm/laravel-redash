@@ -2,9 +2,9 @@
 
 namespace Igorsgm\Redash;
 
+use Igorsgm\Redash\Commands\RedashCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Igorsgm\Redash\Commands\RedashCommand;
 
 class RedashServiceProvider extends PackageServiceProvider
 {
