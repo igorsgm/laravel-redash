@@ -1,6 +1,6 @@
 {
     "name": "igorsgm/laravel-redash",
-    "description": "📊 Laravel Redash",
+    "description": "📊 • A Laravel wrapper to empower your applications with Redash.io APIs. Extract, analyze, and leverage your Redash data right from your app!",
     "keywords": [
         "igorsgm",
         "laravel",
@@ -17,8 +17,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.14.0",
-        "illuminate/contracts": "^10.0"
+        "guzzlehttp/guzzle": "^7.0",
+        "illuminate/contracts": "^10.0",
+        "spatie/laravel-package-tools": "^1.14.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",

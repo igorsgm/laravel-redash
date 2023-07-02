@@ -2,7 +2,7 @@
 
 namespace Igorsgm\Redash;
 
-use Igorsgm\Redash\Commands\RedashCommand;
+use Illuminate\Support\Facades\Http;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,9 +17,17 @@ class RedashServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-redash')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-redash_table')
-            ->hasCommand(RedashCommand::class);
+            ->hasConfigFile();
+    }
+
+    public function packageBooted()
+    {
+        Http::macro('redash', function (array $params = []) {
+            $apiKey = data_get($params, 'api_key') ?: config('redash.api_key');
+            $baseUrl = data_get($params, 'base_url') ?: config('redash.base_url');
+
+            return Http::withToken($apiKey, 'Key')
+                ->baseUrl(rtrim($baseUrl, '/'));
+        });
     }
 }
