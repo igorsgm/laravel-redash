@@ -1,78 +1,157 @@
-# 📊 Laravel Redash
+<h1 align="center">📊 Laravel Redash</h1>
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/igorsgm/laravel-redash.svg?style=flat-square)](https://packagist.org/packages/igorsgm/laravel-redash)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/igorsgm/laravel-redash/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/igorsgm/laravel-redash/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/igorsgm/laravel-redash.svg?style=flat-square)](https://packagist.org/packages/igorsgm/laravel-redash)
+<p align="center">Unleash the power of <a title="Redash" href="https://redash.io/" target="_blank">Redash.io</a> APIs in your Laravel applications. This package allows you to easily extract, analyze, and leverage your data directly within your application. Transform your data management today!</p>
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+<p align="center">
+    <a href="https://packagist.org/packages/igorsgm/laravel-redash">
+        <img src="https://img.shields.io/packagist/v/igorsgm/laravel-redash.svg?style=flat-square" alt="Latest Version on Packagist">
+    </a>
+    <a href="https://github.com/igorsgm/laravel-redash/actions/workflows/main.yml/badge.svg">
+        <img src="https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/main.yml?style=flat-square" alt="Build Status">
+    </a>
+    <img src="https://img.shields.io/scrutinizer/coverage/g/igorsgm/laravel-redash/master?style=flat-square" alt="Test Coverage">
+    <img src="https://img.shields.io/scrutinizer/quality/g/igorsgm/laravel-redash/master?style=flat-square" alt="Code Quality">
+    <a href="https://packagist.org/packages/igorsgm/laravel-redash">
+        <img src="https://img.shields.io/packagist/dt/igorsgm/laravel-redash.svg?style=flat-square" alt="Total Downloads">
+    </a>
+</p>
 
-## Support us
+<hr/>
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-redash.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-redash)
+## ✨ Features
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+> - **Queries**: Easily create, edit, or archive query objects directly from your Laravel application. The package returns paginated arrays of query objects and supports the extraction of individual query objects too.
+> - **Query Results**: Initiate a new query execution or return a cached result effortlessly. Handle parameterized queries and manage max_age for cache bypassing with provided methods.
+> - **Dashboards**: Create, edit, or archive dashboard objects seamlessly. Fetch an array of dashboard objects or individual ones directly from your Laravel application.
+> - **Jobs**: Monitor the status of your query tasks effectively.
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+## 1️⃣ Installation
 
-## Installation
-
-You can install the package via composer:
-
+- You can install the package via composer:
 ```bash
 composer require igorsgm/laravel-redash
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-redash-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
+- You can publish the config file with:
 ```bash
 php artisan vendor:publish --tag="laravel-redash-config"
 ```
 
-This is the contents of the published config file:
+## 2️⃣ Usage
+#### Define Redash API credentials in your `.env` file. i.e.:
+
+```
+REDASH_BASE_URL=foo:bar
+REDASH_API_KEY=12345678900987654321
+```
+
+### Summary
+- Redash API Documentation: https://redash.io/help/user-guide/integrations-and-api/api
+
+
+| Resource               | Methods                                                                           |
+|------------------------|-----------------------------------------------------------------------------------|
+| Redash::queries()      | all, get, create, update, delete, getCachedResult, executeOrGetResult, getResult  |
+| Redash::queryResults() | get                                                                               |
+| Redash::dashboards()   | all, get, create, update, delete                                                  |
+| Redash::jobs()         | get                                                                               |
+
+### Queries
+```php
+// Returns a paginated array of query objects.
+Redash::queries()->all();
+
+// Returns an individual query object.
+Redash::queries()->get($queryId);
+
+// Create a new query object.
+Redash::queries()->create([
+    'name' => 'My Query',
+    'data_source_id' => 1,
+    'query' => 'SELECT * FROM table',
+    'description' => 'My Query Description',
+    // ...
+]);
+
+// Edit an existing query object.
+Redash::queries()->update($queryId, [
+    'name' => 'My New Query Name',
+    // ...
+]);
+
+// Archive an existing query.
+Redash::queries()->delete($queryId);
+
+// Get a cached result for this query ID
+Redash::queries()->getCachedResult($queryId);
+
+// Initiates a new query execution or returns a cached result.
+Redash::queries()->executeOrGetResult($queryId, [
+    'parameters' => [
+        'foo' => 'bar',
+    ],
+    'max_age' => 0,
+]);
+```
+- Execute a Query and return its result once ready (custom method).
+```php
+// The maximum age (in milliseconds) of a cached result that the method should return.
+// If a cached result is older than this, a new query execution will begin.
+// Set to `0` to always start a new execution.
+$maxAge = 1800;
+
+// The number of times to retry the query execution if it is still in progress.
+$retryAttempts = 20;
+
+Redash::queries()->getResult($queryId, [
+    'foo' => 'bar',
+], $maxAge, $retryAttempts);
+```
+### Query Results
 
 ```php
-return [
-];
+// Returns a query result
+Redash::queryResults()->get($queryResultId);
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-redash-views"
-```
-
-## Usage
+### Dashboards
 
 ```php
-$redash = new Igorsgm\Redash();
-echo $redash->echoPhrase('Hello, Igorsgm!');
+Redash::dashboards()->all();
+Redash::dashboards()->get($dashboardId);
+Redash::dashboards()->create([
+    // ...
+]);
+Redash::dashboards()->update($dashboardId, [
+    // ...
+]);
+Redash::dashboards()->delete($dashboardId);
 ```
 
-## Testing
+### Jobs
+
+```php
+Redash::jobs()->get($jobId);
+```
+
+___
+### Testing
 
 ```bash
 composer test
 ```
 
-## Changelog
+### Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Security Vulnerabilities
+### Security
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you discover any security related issues, please email igor.sgm@gmail.com instead of using the issue tracker.
 
 ## Credits
 
