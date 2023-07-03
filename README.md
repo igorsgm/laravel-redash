@@ -9,8 +9,8 @@
     <a href="https://github.com/igorsgm/laravel-redash/actions/workflows/main.yml/badge.svg">
         <img src="https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/main.yml?style=flat-square" alt="Build Status">
     </a>
-    <img src="https://img.shields.io/scrutinizer/coverage/g/igorsgm/laravel-redash/master?style=flat-square" alt="Test Coverage">
-    <img src="https://img.shields.io/scrutinizer/quality/g/igorsgm/laravel-redash/master?style=flat-square" alt="Code Quality">
+    <img src="https://img.shields.io/scrutinizer/coverage/g/igorsgm/laravel-redash/main?style=flat-square" alt="Test Coverage">
+    <img src="https://img.shields.io/scrutinizer/quality/g/igorsgm/laravel-redash/main?style=flat-square" alt="Code Quality">
     <a href="https://packagist.org/packages/igorsgm/laravel-redash">
         <img src="https://img.shields.io/packagist/dt/igorsgm/laravel-redash.svg?style=flat-square" alt="Total Downloads">
     </a>
