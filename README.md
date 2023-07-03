@@ -6,8 +6,8 @@
     <a href="https://packagist.org/packages/igorsgm/laravel-redash">
         <img src="https://img.shields.io/packagist/v/igorsgm/laravel-redash.svg?style=flat-square" alt="Latest Version on Packagist">
     </a>
-    <a href="https://github.com/igorsgm/laravel-redash/actions/workflows/main.yml/badge.svg">
-        <img src="https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/main.yml?style=flat-square" alt="Build Status">
+    <a href="https://github.com/igorsgm/laravel-redash/actions?query=workflow%3Arun-tests+branch%3Amain">
+        <img src="https://img.shields.io/github/actions/workflow/status/igorsgm/laravel-redash/run-tests.yml?branch=main&label=tests&style=flat-square" alt="GitHub Tests Action Status">
     </a>
     <img src="https://img.shields.io/scrutinizer/coverage/g/igorsgm/laravel-redash/main?style=flat-square" alt="Test Coverage">
     <img src="https://img.shields.io/scrutinizer/quality/g/igorsgm/laravel-redash/main?style=flat-square" alt="Code Quality">
