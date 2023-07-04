@@ -3,6 +3,9 @@
     "description": "📊 • A Laravel wrapper to empower your applications with Redash.io APIs. Extract, analyze, and leverage your Redash data right from your app!",
     "keywords": [
         "igorsgm",
+        "redash",
+        "redash.io",
+        "redash-api",
         "laravel",
         "laravel-redash"
     ],
