@@ -122,13 +122,18 @@ class Queries
     public function getResult(int|string $id, array $parameters = [], int $maxAge = 1800, int $retryAttempts = 20)
     {
         // Start a new query execution
-        $job = $this->executeOrGetResult($id, [
+        $jobOrCachedQueryResult = $this->executeOrGetResult($id, [
             'parameters' => $parameters,
             'max_age' => $maxAge,
         ]);
 
-        return retry($retryAttempts, function () use ($job) {
-            $jobId = data_get($job, 'job.id');
+        // Query Result is cached, return it
+        if (data_get($jobOrCachedQueryResult, 'query_result.id')) {
+            return $jobOrCachedQueryResult;
+        }
+
+        return retry($retryAttempts, function () use ($jobOrCachedQueryResult) {
+            $jobId = data_get($jobOrCachedQueryResult, 'job.id');
             $jobStatus = Redash::jobs()->get($jobId);
 
             $status = data_get($jobStatus, 'job.status');
