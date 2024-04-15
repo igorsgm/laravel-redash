@@ -109,12 +109,12 @@ class Queries
     /**
      * Execute a Query and return its result once ready (custom method).
      *
-     * @param  int|string  $id The ID of the query to execute.
-     * @param  array  $parameters The parameters to include in the query execution.
-     * @param  int  $maxAge The maximum age (in milliseconds) of a cached result that the method should return.
-     *        If a cached result is older than this, a new query execution will begin.
-     *        Set to `0` to always start a new execution.
-     * @param  int  $retryAttempts The number of times to retry the query execution if it is still in progress.
+     * @param  int|string  $id  The ID of the query to execute.
+     * @param  array  $parameters  The parameters to include in the query execution.
+     * @param  int  $maxAge  The maximum age (in milliseconds) of a cached result that the method should return.
+     *                       If a cached result is older than this, a new query execution will begin.
+     *                       Set to `0` to always start a new execution.
+     * @param  int  $retryAttempts  The number of times to retry the query execution if it is still in progress.
      * @return array The result of the query execution, as an array.
      *
      * @throws Exception If the query execution fails, is cancelled, or is still in progress after 20 retries.
