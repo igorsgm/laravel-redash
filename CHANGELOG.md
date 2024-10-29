@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-redash` will be documented in this file.
 
+## 1.1.0 - 2024-10-29
+
+- Support Laravel v11 and Pest v3
+
 ## 1.0.2 - 2024-04-15
 
 ### Bug Fixes
