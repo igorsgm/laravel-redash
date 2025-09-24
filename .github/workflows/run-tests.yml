@@ -69,4 +69,4 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-        run: vendor/bin/pest --ci
+        run: XDEBUG_MODE=coverage ./vendor/bin/pest --coverage --coverage-clover=coverage.clover
