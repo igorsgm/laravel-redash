@@ -61,6 +61,7 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
+        shell: bash
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nunomaduro/collision:${{ matrix.collision }}" "pestphp/pest:${{ matrix.pest }}" "pestphp/pest-plugin-laravel:${{ matrix.pest-laravel }}" "nunomaduro/larastan:${{ matrix.larastan }}" "phpstan/phpstan-deprecation-rules:${{ matrix.phpstan-deprecation }}" --dev --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
@@ -69,4 +70,5 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
+        shell: bash
         run: XDEBUG_MODE=coverage ./vendor/bin/pest --coverage
