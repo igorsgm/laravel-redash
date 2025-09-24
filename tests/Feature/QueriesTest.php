@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Igorsgm\Redash\Enums\JobStatus;
 use Igorsgm\Redash\Facades\Redash;
 use Illuminate\Support\Facades\Http;
