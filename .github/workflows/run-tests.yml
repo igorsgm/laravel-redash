@@ -20,7 +20,7 @@ jobs:
           - laravel: 12.*
             testbench: 10.*
             collision: ^8.4.0
-            pest: ^4.0
+            pest: ^3.0
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
