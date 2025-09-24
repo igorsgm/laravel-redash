@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igorsgm\Redash\Enums;
 
 enum JobStatus: int

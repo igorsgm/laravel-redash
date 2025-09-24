@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igorsgm\Redash\Resources;
 
 use Exception;
@@ -137,10 +139,13 @@ class Queries
             $jobStatus = Redash::jobs()->get($jobId);
 
             $status = data_get($jobStatus, 'job.status');
-            if ($status == JobStatus::SUCCESS->value) {
+
+            if ($status === JobStatus::SUCCESS->value) {
                 // Job has finished successfully, fetch the result
                 return Redash::queryResults()->get(data_get($jobStatus, 'job.query_result_id'));
-            } elseif (in_array($status, [JobStatus::FAILURE->value, JobStatus::CANCELLED->value])) {
+            }
+
+            if (in_array($status, [JobStatus::FAILURE->value, JobStatus::CANCELLED->value])) {
                 // Job has failed or been cancelled, throw an exception
                 throw new Exception('Query execution failed or was cancelled');
             }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igorsgm\Redash;
 
 use Illuminate\Support\Facades\Http;
@@ -27,7 +29,7 @@ class RedashServiceProvider extends PackageServiceProvider
             $baseUrl = data_get($params, 'base_url') ?: config('redash.base_url');
 
             return Http::withToken($apiKey, 'Key')
-                ->baseUrl(rtrim($baseUrl, '/'));
+                ->baseUrl($baseUrl ? mb_rtrim($baseUrl, '/') : '');
         });
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Http;
 
 it('configures the Http::redash() macro correctly', function () {
@@ -20,7 +22,7 @@ it('configures the Http::redash() macro correctly', function () {
     // Check that the request was sent with the correct apiKey and baseUrl.
     Http::assertSent(function ($request) use ($apiKey, $baseUrl) {
         return $request->hasHeader('Authorization', 'Key '.$apiKey) &&
-            $request->url() === rtrim($baseUrl, '/').'/endpoint';
+            $request->url() === mb_rtrim($baseUrl, '/').'/endpoint';
     });
 
     // Assert that the response was successful.

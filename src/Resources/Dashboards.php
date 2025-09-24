@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Igorsgm\Redash\Resources;
 
 use Igorsgm\Redash\Resources\Concerns\HasParams;
