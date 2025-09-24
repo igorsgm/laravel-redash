@@ -22,25 +22,25 @@ jobs:
         include:
           - laravel: 12.*
             testbench: 10.*
-            collision: ^8.4.0
-            pest: ^4.0
-            pest-laravel: ^4.0
-            larastan: ^3.7.2
-            phpstan-deprecation: ^2.0
+            collision: '^8.4.0'
+            pest: '^4.0'
+            pest-laravel: '^4.0'
+            larastan: '^3.7.2'
+            phpstan-deprecation: '^2.0'
           - laravel: 11.*
             testbench: 9.*
-            collision: ^8.4.0
-            pest: ^3.0
-            pest-laravel: ^3.0
-            larastan: ^3.7.2
-            phpstan-deprecation: ^2.0
+            collision: '^8.4.0'
+            pest: '^3.0'
+            pest-laravel: '^3.0'
+            larastan: '^3.7.2'
+            phpstan-deprecation: '^2.0'
           - laravel: 10.*
             testbench: 8.*
-            collision: ^7.0
-            pest: ^2.0
-            pest-laravel: ^2.0
-            larastan: ^2.0
-            phpstan-deprecation: ^1.0
+            collision: '^7.0'
+            pest: '^2.0'
+            pest-laravel: '^2.0'
+            larastan: '^2.0'
+            phpstan-deprecation: '^1.0'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
